@@ -26,19 +26,26 @@ const Fruit = mongoose.model('Fruit', fruitSchema);
 // });
 
 // fruit.save();
+const pineapple = new Fruit({
+    name: "pineapple",
+    rating: 10,
+    review: "great fruit"
+});
+pineapple.save();
 
-// const PersonSchema = new mongoose.Schema({
-//     name: String,
-//     age: Number,
-// });
+const PersonSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    favouriteFruit: fruitSchema
+});
 
-// const Person = mongoose.model('Person', PersonSchema);
-
-// const person = new Person({
-//     name: "joker",
-//     age: 29,
-// });
-// person.save();
+const Person = mongoose.model('Person', PersonSchema);
+const person = new Person({
+    name: "rahul",
+    age: 29,
+    favouriteFruit: pineapple
+});
+person.save();
 
 // const Apple = new Fruit({
 //     name: "Apple",
@@ -86,5 +93,12 @@ Fruit.updateOne({_id: "621bc93183fb8c51c3f2d269"}, {name: "peach"}, function(err
       console.log(err);
     } else {
       console.log("Successfully updated");
+    }
+  });
+  Fruit.deleteOne({_id: "621bc93183fb8c51c3f2d269"}, function(err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Successfully deleted");
     }
   });
